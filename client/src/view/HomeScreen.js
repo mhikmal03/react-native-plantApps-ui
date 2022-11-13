@@ -31,7 +31,13 @@ const HomeScreen = () => {
         );
     };
 
+    const Card = () => {
+        return (
+            <View style={style.card}>
 
+            </View>
+        )
+    }
 
 
     return (
@@ -65,7 +71,7 @@ const HomeScreen = () => {
             </View>
             {categoryList()}
             <FlatList
-                numColumns={2} 
+                numColumns={2} data={plants} 
             ></FlatList>
         </SafeAreaView>
 
@@ -117,7 +123,8 @@ const style = StyleSheet.create({
         paddingBottom: 5,
         borderBottomWidth: 2,
         borderColor: 'green',
-    }
+    }, 
+    
 
 })
 
