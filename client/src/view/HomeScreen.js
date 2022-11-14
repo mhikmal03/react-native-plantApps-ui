@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Card from '../components/Card';
 import plants from '../const/plantList';
 // icon
-const cartIcon = <Icon name="shopping-cart" size={30} color="black" />;
-const searchIcon = <Icon name="search" size={25} color="black" style={{ marginLeft: 20 }} />;
+const cartIcon = <Icon name="shopping-cart" size={25} color="black" />;
+const searchIcon = <Icon name="search" size={20} color="black" style={{ marginLeft: 20 }} />;
 const sortIcon = <Icon name="sort-amount-down" size={25} style={{ color: 'white' }} />
+
+// dimensions
+const width = Dimensions.get("screen").width / 2 - 30;
+
+
 
 
 const HomeScreen = () => {
@@ -31,13 +37,7 @@ const HomeScreen = () => {
         );
     };
 
-    const Card = () => {
-        return (
-            <View style={style.card}>
 
-            </View>
-        )
-    }
 
 
     return (
@@ -47,11 +47,13 @@ const HomeScreen = () => {
                 backgroundColor: 'white',
             }}
         >
+
+
             <View style={style.header}>
                 <View>
                     <Text style={{ fontSize: 25, fontWeight: 'bold' }}
                     >Welcome To</Text>
-                    <Text style={{ fontSize: 38, fontWeight: 'bold', color: '#407A52' }}
+                    <Text style={{ fontSize: 38, fontWeight: 'bold', color: '#5edb80' }}
                     >Plantify</Text>
                 </View>
                 <View className="icon">
@@ -69,11 +71,24 @@ const HomeScreen = () => {
                 </View>
 
             </View>
+
             {categoryList()}
             <FlatList
-                numColumns={2} data={plants} 
-            ></FlatList>
-        </SafeAreaView>
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    marginTop: 10,
+                    paddingBottom: 50,
+                }}
+                numColumns={2}
+                data={plants}
+                renderItem={({ item }) => {
+                    return <Card plant={item} />;
+                }}
+            />
+
+
+        </SafeAreaView >
 
 
     )
@@ -87,7 +102,7 @@ const style = StyleSheet.create({
     },
     searchContainer: {
         height: 50,
-        backgroundColor: 'white',
+        backgroundColor: '#f8f8f8',
         borderRadius: 10,
         flex: 1,
         flexDirection: 'row',
@@ -98,12 +113,13 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         flex: 1,
+        marginLeft: 5
     },
     sortBtn: {
         marginLeft: 10,
         height: 50,
         width: 50,
-        backgroundColor: 'green',
+        backgroundColor: '#5edb80',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -119,12 +135,12 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
     },
     categorySelected: {
-        color: 'green',
+        color: '#5edb80',
         paddingBottom: 5,
         borderBottomWidth: 2,
-        borderColor: 'green',
-    }, 
-    
+        borderColor: '#5edb80',
+    },
+
 
 })
 
